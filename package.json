@@ -1,6 +1,6 @@
 {
   "name": "spatial-navigation-ts",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A javascript-based implementation of Spatial Navigation with Typescript definitions.",
   "homepage": "https://github.com/ValeraGin/spatial-navigation-ts",
   "repository": {
