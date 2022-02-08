@@ -6,138 +6,96 @@
  * Licensed under the MPL 2.0.
  */
 
-declare module "spatial-navigation-ts"
+export type Restrict = 'self-first' | 'self-only' | 'none';
 
-declare namespace SN {
+export type Direction = 'left' | 'right' | 'up' | 'down';
 
-	type Restrict = 'self-first' | 'self-only' | 'none';
+export type Selector = string
 
-	type Direction = 'left' | 'right' | 'up' | 'down';
+export type Filter = (elem: HTMLElement) => void
 
-	type Selector = string
+export type Cause = 'keydown' | 'api';
 
-	type Filter = (elem: HTMLElement) => void
-
-	type Cause = 'keydown' | 'api';
-
-	interface Configuration {
-		selector?: Selector,
-		straightOnly?: boolean,
-		straightOverlapThreshold?: number,
-		rememberSource?: boolean,
-		disabled?: boolean,
-		defaultElement?: Selector,
-		enterTo?: string,
-		leaveFor?: null,
-		restrict?: Restrict,
-		tabIndexIgnoreList?: Selector,
-		navigableFilter?: Filter
-	}
-
-	interface SpatialNavigation {
-		init(): void;
-
-		uninit(): void;
-
-		clear(): void;
-
-		set(config: Configuration): any;
-
-		set(sectionId: string, config: Configuration): any;
-
-		add(config: Configuration): any;
-
-		add(sectionId: string, config: Configuration): any;
-
-		remove(sectionId: string): boolean;
-
-		disable(sectionId: string): boolean;
-
-		enable(sectionId: string): boolean;
-
-		pause(): void;
-
-		resume(): void;
-
-		focus(sectionId?: string, silent?: any): boolean;
-
-		focus(selector?: string, silent?: any): boolean;
-
-		move(direction: Direction, selector?: string): boolean;
-
-		makeFocusable(sectionId?: string): void;
-
-		setDefaultSection(sectionId?: string): void;
-	}
+export interface Configuration {
+	selector?: Selector,
+	straightOnly?: boolean,
+	straightOverlapThreshold?: number,
+	rememberSource?: boolean,
+	disabled?: boolean,
+	defaultElement?: Selector,
+	enterTo?: string,
+	leaveFor?: null,
+	restrict?: Restrict,
+	tabIndexIgnoreList?: Selector,
+	navigableFilter?: Filter
 }
 
-
-interface WillMoveEvent extends Event {
+export interface WillMoveEvent extends Event {
 	detail: {
-		cause: SN.Cause
+		cause: Cause
 		sectionId: string,
-		direction: SN.Direction
+		direction: Direction
 	}
 }
 
-interface WillMoveEvent extends Event {
+export interface WillMoveEvent extends Event {
 	detail: {
-		cause: SN.Cause
+		cause: Cause
 		sectionId: string,
-		direction: SN.Direction
+		direction: Direction
 	}
 }
 
-interface WillMoveEvent extends Event {
+export interface WillMoveEvent extends Event {
 	detail: {
-		cause: SN.Cause
+		cause: Cause
 		sectionId: string,
-		direction: SN.Direction
+		direction: Direction
 	}
 }
 
-interface WillMoveEvent extends Event {
+export interface WillMoveEvent extends Event {
 	detail: {
-		cause: SN.Cause
+		cause: Cause
 		sectionId: string,
-		direction: SN.Direction
+		direction: Direction
 	}
 }
 
-interface WillUnFocusEvent extends Event {
+export interface WillUnFocusEvent extends Event {
 	detail: {
 		nextElement: Element
 		nextSectionId: string
-		direction: SN.Direction
+		direction: Direction
 		native: boolean
 	}
 }
 
-interface UnFocusedEvent extends Event {
+export interface UnFocusedEvent extends Event {
 	detail: {
 		nextElement: Element
 		nextSectionId: string
-		direction: SN.Direction
+		direction: Direction
 		native: boolean
 	}
 }
 
-interface WillFocusEvent extends Event {
+export interface WillFocusEvent extends Event {
 	detail: {
 		sectionId: string,
 		previousElement: Element
-		direction: SN.Direction
+		direction: Direction
 		native: boolean
 	}
 }
 
-interface NavigateFailedEvent extends Event {
+export interface NavigateFailedEvent extends Event {
 	detail: {
-		direction: SN.Direction
+		direction: Direction
 	}
 }
 
-interface SpatialNavigationEventMap {
+export interface SpatialNavigationEventMap {
 	"sn:willmove": WillMoveEvent;
 	"sn:willunfocus": WillUnFocusEvent;
 	"sn:unfocused": UnFocusedEvent;
@@ -148,14 +106,53 @@ interface SpatialNavigationEventMap {
 	"sn:enter-up": Event;
 }
 
-interface HTMLElement {
-	addEventListener<K extends keyof SpatialNavigationEventMap>(type: K, listener: (this: HTMLElement, ev: SpatialNavigationEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+
+export interface SpatialNavigation {
+	init(): void;
+
+	uninit(): void;
+
+	clear(): void;
+
+	set(config: Configuration): any;
+
+	set(sectionId: string, config: Configuration): any;
+
+	add(config: Configuration): any;
+
+	add(sectionId: string, config: Configuration): any;
+
+	remove(sectionId: string): boolean;
+
+	disable(sectionId: string): boolean;
+
+	enable(sectionId: string): boolean;
+
+	pause(): void;
+
+	resume(): void;
+
+	focus(sectionId?: string, silent?: any): boolean;
+
+	focus(selector?: string, silent?: any): boolean;
+
+	move(direction: Direction, selector?: string): boolean;
+
+	makeFocusable(sectionId?: string): void;
+
+	setDefaultSection(sectionId?: string): void;
 }
 
-interface Window {
-	SpatialNavigation: SN.SpatialNavigation;
-}
+declare var SpatialNavigation: SpatialNavigation;
 
-declare var SpatialNavigation: SN.SpatialNavigation;
+declare global {
+	interface HTMLElement {
+		addEventListener<K extends keyof SpatialNavigationEventMap>(type: K, listener: (this: HTMLElement, ev: SpatialNavigationEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+	}
+
+	interface Window {
+		SpatialNavigation: SpatialNavigation;
+	}
+}
 
 export default SpatialNavigation;
