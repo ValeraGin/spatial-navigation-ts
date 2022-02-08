@@ -155,3 +155,5 @@ interface Window {
 }
 
 declare var SpatialNavigation: SN.SpatialNavigation;
+
+export default SpatialNavigation;
