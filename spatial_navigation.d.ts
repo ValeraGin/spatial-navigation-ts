@@ -6,6 +6,8 @@
  * Licensed under the MPL 2.0.
  */
 
+declare module "spatial-navigation-ts"
+
 declare namespace SN {
 
 	type Restrict = 'self-first' | 'self-only' | 'none';
