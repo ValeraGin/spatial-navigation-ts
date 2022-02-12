@@ -100,4 +100,3 @@ export class AppComponent implements OnInit {
 ### More Demonstrations
 
 + [Demonstrations](https://luke-chang.github.io/js-spatial-navigation/demo/)
-+ 
